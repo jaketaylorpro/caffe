@@ -228,7 +228,7 @@ void Classifier::Preprocess(const cv::Mat& img,
 
 int main(int argc, char** argv) {
   if (argc == 7 && strcmp(argv[6], "--metadata") == 0) {
-    std::cout << "{\"model_id\":\"caffe/cpp_classification\",\"schema_in\":{\"type\":\"object\",\"properties\":{\"image.jpg\":{\"type\":\"string\",\"format\":\"base64\",\"title\":\"test.jpg\",\"_mime-type\":\"image/jpg\",\"_control\":\"file\"}}},\"schema_out\":{\"type\":\"object\",\"properties\":{\"guess\":{\"type\":\"string\",\"title\":\"Guess\",\"_order\":1},\"conf\":{\"type\":\"float\",\"format\":\"percentage\",\"title\":\"Confidence\",\"_order\":2}}},\"info\":{\"name\":\"Caffe Example C++ Classification\",\"title\":\"Caffe C++ Classification Example adapted for the mccoy platform.\",\"abstract\":\"N/a\",\"date_trained\":\"N/a\",\"data_source\":\"ilsvrc training set\",\"ground_truth\":\"N/a\",\"algorithm\":\"Neural Net",\"performance\":\"N/a\",\"fda_status\":\"N/a\"}}";
+    std::cout << "{\"model_id\":\"caffe/cpp_classification\",\"schema_in\":{\"type\":\"object\",\"properties\":{\"image.jpg\":{\"type\":\"string\",\"format\":\"base64\",\"title\":\"test.jpg\",\"_mime-type\":\"image/jpg\",\"_control\":\"file\"}}},\"schema_out\":{\"type\":\"object\",\"properties\":{\"guess\":{\"type\":\"string\",\"title\":\"Guess\",\"_order\":1},\"conf\":{\"type\":\"float\",\"format\":\"percentage\",\"title\":\"Confidence\",\"_order\":2}}},\"info\":{\"name\":\"Caffe Example C++ Classification\",\"title\":\"Caffe C++ Classification Example adapted for the mccoy platform.\",\"abstract\":\"N/a\",\"date_trained\":\"N/a\",\"data_source\":\"ilsvrc training set\",\"ground_truth\":\"N/a\",\"algorithm\":\"Neural Net\",\"performance\":\"N/a\",\"fda_status\":\"N/a\"}}";
     return 0;
   }
   if (argc != 6) {
