@@ -260,7 +260,7 @@ int main(int argc, char** argv) {
  confOut << std::fixed << std::setprecision(4) << predictions[0].second;
  confOut.close();
  std::ofstream guessOut("/mccoy/output/guess");
- guessOut << p.first;
+ guessOut << predictions[0].first;
  guessOut.close();
  for (size_t i = 0; i < predictions.size(); ++i) {
     Prediction p = predictions[i];
