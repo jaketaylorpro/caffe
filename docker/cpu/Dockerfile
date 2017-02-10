@@ -36,8 +36,8 @@ RUN git clone -b ${CLONE_TAG} --depth 1 https://github.com/jaketaylorpro/caffe.g
     mkdir build && cd build && \
     cmake -DCPU_ONLY=1 .. && \
     make -j"$(nproc)" && \
-    ./scripts/download_model_binary.py models/bvlc_reference_caffenet && \
-    ./data/ilsvrc12/get_ilsvrc_aux.sh
+    /opt/caffe/scripts/download_model_binary.py models/bvlc_reference_caffenet && \
+    /opt/caffe/data/ilsvrc12/get_ilsvrc_aux.sh
 
 ENV PYCAFFE_ROOT $CAFFE_ROOT/python
 ENV PYTHONPATH $PYCAFFE_ROOT:$PYTHONPATH
