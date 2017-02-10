@@ -227,6 +227,10 @@ void Classifier::Preprocess(const cv::Mat& img,
 }
 
 int main(int argc, char** argv) {
+  if (argc == 7 && argv[6] == "--metadata") {
+    std:cout << "{\"model_id\":\"caffe/cpp_classification\",\"schema_in\":{\"type\":\"object\",\"properties\":{\"image.jpg\":{\"type\":\"string\",\"format\":\"base64\",\"title\":\"test.jpg\",\"_mime-type\":\"image/jpg\"}}},\"schema_out\":{\"type\":\"object\",\"properties\":{\"guess\":{\"type\":\"string\",\"title\":\"Guess\",\"_order\":1},\"conf\":{\"type\":\"float\",\"format\":\"percentage\",\"title\":\"Confidence\",\"_order\":2}}},\"info\":{\"name\":\"Test Hello World\",\"title\":\"Test machine for demonstration or testing purposes only\",\"abstract\":\"N/a\",\"date_trained\":\"N/a\",\"data_source\":\"N/a\",\"ground_truth\":\"N/a\",\"algorithm\":\"N/a\",\"performance\":\"N/a\",\"fda_status\":\"N/a\"}}";
+    return 0;
+  }
   if (argc != 6) {
     std::cerr << "Usage: " << argv[0]
               << " deploy.prototxt network.caffemodel"
@@ -252,7 +256,13 @@ int main(int argc, char** argv) {
   std::vector<Prediction> predictions = classifier.Classify(img);
 
   /* Print the top N predictions. */
-  for (size_t i = 0; i < predictions.size(); ++i) {
+ std::ofstream confOut("/mccoy/output/conf");
+ confOut << std::fixed << std::setprecision(4) << predictions[0].second;
+ confOut.close();
+ std::ofstream guessOut("/mccoy/output/guess");
+ guessOut << p.first;
+ guessOut.close();
+ for (size_t i = 0; i < predictions.size(); ++i) {
     Prediction p = predictions[i];
     std::cout << std::fixed << std::setprecision(4) << p.second << " - \""
               << p.first << "\"" << std::endl;
