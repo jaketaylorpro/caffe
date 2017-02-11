@@ -255,11 +255,11 @@ int main(int argc, char** argv) {
   for (size_t i = 0; i < predictions.size(); ++i) {
     Prediction p = predictions[i];
     // write guess
-    std::ofstream guessOut("/mccoy/output/guess"+i);
+    std::ofstream guessOut("/mccoy/output/guess"+std::to_string(i));
     guessOut << p.first;
     guessOut.close();
     // write confidence
-    std::ofstream confOut("/mccoy/output/conf"+i);
+    std::ofstream confOut("/mccoy/output/conf"+std::to_string(i));
     confOut << std::fixed << std::setprecision(4) << p.second;
     confOut.close();
     // print guess and confidence
