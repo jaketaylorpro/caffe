@@ -227,10 +227,6 @@ void Classifier::Preprocess(const cv::Mat& img,
 }
 
 int main(int argc, char** argv) {
-  if (argc == 7 && strcmp(argv[6], "--metadata") == 0) {
-    std::cout << "{\"model_id\":\"caffe/cpp_classification\",\"schema_in\":{\"type\":\"object\",\"properties\":{\"image.jpg\":{\"type\":\"string\",\"format\":\"base64\",\"title\":\"test.jpg\",\"_mime-type\":\"image/jpg\",\"_control\":\"file\"}}},\"schema_out\":{\"type\":\"object\",\"properties\":{\"guess\":{\"type\":\"string\",\"title\":\"Guess\",\"_order\":1},\"conf\":{\"type\":\"number\",\"format\":\"percentage\",\"title\":\"Confidence\",\"_order\":2}}},\"info\":{\"name\":\"Caffe Example C++ Classification\",\"title\":\"Caffe C++ Classification Example adapted for the mccoy platform.\",\"abstract\":\"N/a\",\"date_trained\":\"N/a\",\"data_source\":\"ilsvrc training set\",\"ground_truth\":\"N/a\",\"algorithm\":\"Neural Net\",\"performance\":\"N/a\",\"fda_status\":\"N/a\"}}";
-    return 0;
-  }
   if (argc != 6) {
     std::cerr << "Usage: " << argv[0]
               << " deploy.prototxt network.caffemodel"
@@ -256,14 +252,17 @@ int main(int argc, char** argv) {
   std::vector<Prediction> predictions = classifier.Classify(img);
 
   /* Print the top N predictions. */
- std::ofstream confOut("/mccoy/output/conf");
- confOut << std::fixed << std::setprecision(4) << predictions[0].second;
- confOut.close();
- std::ofstream guessOut("/mccoy/output/guess");
- guessOut << predictions[0].first;
- guessOut.close();
- for (size_t i = 0; i < predictions.size(); ++i) {
+  for (size_t i = 0; i < predictions.size(); ++i) {
     Prediction p = predictions[i];
+    // write guess
+    std::ofstream guessOut("/mccoy/output/guess"+i);
+    guessOut << p.first;
+    guessOut.close();
+    // write confidence
+    std::ofstream confOut("/mccoy/output/conf"+i);
+    confOut << std::fixed << std::setprecision(4) << p.second;
+    confOut.close();
+    // print guess and confidence
     std::cout << std::fixed << std::setprecision(4) << p.second << " - \""
               << p.first << "\"" << std::endl;
   }
