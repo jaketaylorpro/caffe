@@ -8,6 +8,7 @@
 #include <iosfwd>
 #include <memory>
 #include <string>
+#include <sstream>
 #include <utility>
 #include <vector>
 
@@ -253,17 +254,21 @@ int main(int argc, char** argv) {
 
   /* Print the top N predictions. */
   for (size_t i = 0; i < predictions.size(); ++i) {
-    std::stringstream guessPath;
-    guessPath << "/mccoy/output/guess" << i;
-    std::stringstream confPath;
-    confPath << "/mccoy/output/conf" << i;
+    std::stringstream guessPathStream;
+    std::string guessPath;
+    guessPathStream << "/mccoy/output/guess" << i;
+    guessPathStream >> guessPath;
+    std::stringstream confPathStream;
+    std::string confPath;
+    confPathStream << "/mccoy/output/conf" << i;
+    confPathStream >> confPath;
     Prediction p = predictions[i];
     // write guess
-    std::ofstream guessOut(guessPath.str());
+    std::ofstream guessOut(guessPath);
     guessOut << p.first;
     guessOut.close();
     // write confidence
-    std::ofstream confOut(confPath.str());
+    std::ofstream confOut(confPath);
     confOut << std::fixed << std::setprecision(4) << p.second;
     confOut.close();
     // print guess and confidence
