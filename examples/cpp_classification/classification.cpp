@@ -255,15 +255,15 @@ int main(int argc, char** argv) {
   for (size_t i = 0; i < predictions.size(); ++i) {
     std::stringstream guessPath;
     guessPath << "/mccoy/output/guess" << i
-    std::stringstream guessPath;
+    std::stringstream confPath;
     confPath << "/mccoy/output/conf" << i
     Prediction p = predictions[i];
     // write guess
-    std::ofstream guessOut(guessPath);
+    std::ofstream guessOut(guessPath.str());
     guessOut << p.first;
     guessOut.close();
     // write confidence
-    std::ofstream confOut(confPath);
+    std::ofstream confOut(confPath.str());
     confOut << std::fixed << std::setprecision(4) << p.second;
     confOut.close();
     // print guess and confidence
