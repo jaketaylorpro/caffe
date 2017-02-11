@@ -253,13 +253,17 @@ int main(int argc, char** argv) {
 
   /* Print the top N predictions. */
   for (size_t i = 0; i < predictions.size(); ++i) {
+    std::stringstream guessPath;
+    guessPath << "/mccoy/output/guess" << i
+    std::stringstream guessPath;
+    confPath << "/mccoy/output/conf" << i
     Prediction p = predictions[i];
     // write guess
-    std::ofstream guessOut("/mccoy/output/guess"+std::to_string(i));
+    std::ofstream guessOut(guessPath);
     guessOut << p.first;
     guessOut.close();
     // write confidence
-    std::ofstream confOut("/mccoy/output/conf"+std::to_string(i));
+    std::ofstream confOut(confPath);
     confOut << std::fixed << std::setprecision(4) << p.second;
     confOut.close();
     // print guess and confidence
