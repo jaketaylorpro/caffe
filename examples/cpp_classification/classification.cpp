@@ -254,9 +254,9 @@ int main(int argc, char** argv) {
   /* Print the top N predictions. */
   for (size_t i = 0; i < predictions.size(); ++i) {
     std::stringstream guessPath;
-    guessPath << "/mccoy/output/guess" << i
+    guessPath << "/mccoy/output/guess" << i;
     std::stringstream confPath;
-    confPath << "/mccoy/output/conf" << i
+    confPath << "/mccoy/output/conf" << i;
     Prediction p = predictions[i];
     // write guess
     std::ofstream guessOut(guessPath.str());
