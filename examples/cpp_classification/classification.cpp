@@ -264,11 +264,11 @@ int main(int argc, char** argv) {
     confPathStream >> confPath;
     Prediction p = predictions[i];
     // write guess
-    std::ofstream guessOut(guessPath);
+    std::ofstream guessOut(guessPath.c_str());
     guessOut << p.first;
     guessOut.close();
     // write confidence
-    std::ofstream confOut(confPath);
+    std::ofstream confOut(confPath.c_str());
     confOut << std::fixed << std::setprecision(4) << p.second;
     confOut.close();
     // print guess and confidence
