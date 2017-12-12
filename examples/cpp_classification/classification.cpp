@@ -256,11 +256,11 @@ int main(int argc, char** argv) {
   for (size_t i = 0; i < predictions.size(); ++i) {
     std::stringstream guessPathStream;
     std::string guessPath;
-    guessPathStream << "/mccoy/output/guess" << i;
+    guessPathStream << "/envoyai/output/guess" << i;
     guessPathStream >> guessPath;
     std::stringstream confPathStream;
     std::string confPath;
-    confPathStream << "/mccoy/output/conf" << i;
+    confPathStream << "/envoyai/output/conf" << i;
     confPathStream >> confPath;
     Prediction p = predictions[i];
     // write guess
